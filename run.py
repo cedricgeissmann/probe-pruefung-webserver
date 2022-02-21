@@ -13,21 +13,58 @@ def load_selectors():
         return json.load(f)
 
 
-# webscraping function
+# webscraping function                                         #der ganze rest kommt hier rein
 def my_scraper():
-    # YOUR CODE GOES HERE
-    pass
+# get the URL in a useable form
+    url = "https://www.w3schools.com/cssref/css_selectors.asp"
+    response = requests.get(url)
+    soup = BeautifulSoup(response.content, 'html.parser')
+
+    # select your objects
+    table_rows = [elem for elem in soup.select('.ws-table-all tr')]
+
+
+    # define filter function                  #wird nicht mehr gebraucht
+    def filter_func(elem):
+        return True
+
+    # apply filter function                  #wie man filter anwendet
+    table_rows = list(filter(my_filter, table_rows))          #hier my filter eingesetzt 
+
+
+    # create the structure for the json file
+    selectors = []                           #Resultat das geschirben werden soll (Liste)
+
+    for row in table_rows:
+        cells = list(row.select('td'))
+        if cells:                             #Falls Zelle vorhanden ist
+            entry = {
+                'selector': "placeholder text, which will be overwritten below",
+                'example': cells[1].text,
+                'description': cells[2].text,
+                
+            }
+            # we need the following code beacause not all entries in the first column are text - some are links (a-tag)
+            if cells[0].a:
+                entry['selector'] = cells[0].a.text              #Wenn es a hat (internet Tabelle)
+            else:
+                entry['selector'] = cells[0].text               #Falls kein a dann nur der Text
+
+            selectors.append(entry)
+                                                          #alles bis hier von scrape eingeführt
+write_json(selectors)                                      #eingefügt 
 
 
 # filter function
-def my_filter():
-    # YOUR CODE GOES HERE
-    pass
+def my_filter(elem):                                        #elem =element rein geschirben
+    return True                                             # YOUR CODE GOES HERE
+    
 
 # output to json
-def write_json():
-    # YOUR CODE GOES HERE
-    pass
+def write_json(selectors):                                    #selectors rein geschrieben
+ with open("selectors.json", 'w') as f:  
+    json.dump(selectors, f, indent=4)                           # YOUR CODE GOES HERE
+    
 
 
 # define route(s)
