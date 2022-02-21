@@ -1,6 +1,8 @@
 #import necessary modules
 from flask import Flask, render_template
 import json
+from bs4 import BeautifulSoup                   #die vom scrape eingefügt das es Server finden kann
+import requests
 
 
 # set up flask webserver
@@ -13,7 +15,8 @@ def load_selectors():
         return json.load(f)
 
 
-# webscraping function                                         #der ganze rest kommt hier rein
+# webscraping function     
+@app.route("/run-scraper")     #neu eingefügt               #der ganze rest kommt hier rein
 def my_scraper():
 # get the URL in a useable form
     url = "https://www.w3schools.com/cssref/css_selectors.asp"
@@ -50,9 +53,9 @@ def my_scraper():
             else:
                 entry['selector'] = cells[0].text               #Falls kein a dann nur der Text
 
-            selectors.append(entry)
-                                                          #alles bis hier von scrape eingeführt
-write_json(selectors)                                      #eingefügt 
+            selectors.append(entry)                            #alles bis hier von scrape eingeführt
+    write_json(selectors)     
+    return "Scraping finished."                                 #eingefügt 
 
 
 # filter function
@@ -69,8 +72,13 @@ def write_json(selectors):                                    #selectors rein ge
 
 # define route(s)
 @app.route("/")
-def home():
+def home():                                                  #Diese unten nochmal eingefügt
     return render_template("index.html")
+
+# define route(s)
+@app.route("/scraping")
+def scraping():                                                #muss anderen Namen wie oben haben
+    return render_template("scraping.html")                    #War Aufgabe 6
 
 
 @app.route("/css-selectors")
