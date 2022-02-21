@@ -81,10 +81,13 @@ def scraping():                                                #muss anderen Nam
     return render_template("scraping.html")                    #War Aufgabe 6
 
 
-@app.route("/css-selectors")
+@app.route("/css-selectors")                               #das macht schon was wir wollen Aufg. 6
 def css_selectors():
     return render_template("css-selectors.html", selectors=load_selectors())
 
+@app.route("/results")                                       # der / wichtig
+def results():                                              #neu eingefügt
+    return render_template("results.html", results=load_selectors())
 
 # starts the webserver
 if __name__ == "__main__":

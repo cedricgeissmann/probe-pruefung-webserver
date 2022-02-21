@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Resultate</h2>
+    {% for entry in results%}
+    <div>  
+        <h3>{{entry.selector}}</h3> 
+        <p>{{entry.example}}</p>  
+        <p>{{entry.description}}</p>
+ 
+    </div>
+    {% endfor%}
+{% endblock %}
