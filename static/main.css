@@ -1,13 +1,54 @@
 * {
-    margin: 0;
-    padding: 0;
+    
+
+    
+    margin: 10;
+    padding: 20;
     font-family: sans-serif;
+    
 }
+
+
 
 body {
     background: #eeeeee;
 }
 
 .shadow {
-    box-shadow: 0px 2px 5px 2px darkgrey;
+    box-shadow: 0px 2px 5px 2px rgb(212, 209, 209);
+
 }
+
+h1 {
+    margin: 10px 10%;
+    padding: 10px;
+    text-align: center;
+    background: white;
+}
+
+.navbar {
+    width: 100px;
+    padding: 30px;
+    background-color: white;
+}
+
+.nav-item {
+
+    list-style: none;
+}
+
+.nav-link {
+    font-size: 20pt;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#content{
+    margin-left: 200px;
+    margin-top: -60px;
+    
+}
+
+
+
